@@ -1,0 +1,54 @@
+﻿@model Item
+@using WebAPI.Enums;
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit Item</h1>
+
+<form method="post" asp-controller="ItemsMVC" asp-action="Edit">
+    <div class="border m-2 p-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Item</h2>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" readonly />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Preco" class="form-label"></label>
+                <input asp-for="Preco" class="form-control" />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                @Html.DropDownListFor(m => m.TypeComida,
+                new SelectList(Enum.GetValues(typeof(EnumTypeComida))),
+                "Select Ingredient Type")
+            </div>
+            <label>Ingredientes</label>
+            <div>
+                @{
+
+                }
+                @foreach (var ingrediente in ViewBag.Item.Ingredientes)
+                {
+                    <div class="form-check">
+                        <input type="checkbox" id="Check_@ingrediente.Name" name="ingredientesSelecionados" value="@ingrediente.Name" />
+                        <label for="Check_@ingrediente.Name">@ingrediente.Name</label>
+                    </div>
+                }
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-controller="ItemsMVC" asp-action="Index" class="btn btn-secondary">Back</a>
+        </div>
+</form>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

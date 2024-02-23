@@ -1,0 +1,48 @@
+﻿@model WebAPI.Models.Pedido
+@using ProjetoLDS.Models
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detalhes do pedido</h1>
+
+<h2>Itens do Pedido</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID do Item Pedido</th>
+            <th>Nome do Produto</th>
+            <th>Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var itemPedido in Model.ItensPedido)
+        {
+            <tr>
+                <td>@itemPedido.Id</td>
+                <td>
+                    @if (itemPedido.ItemCompra != null && itemPedido.ItemCompra.Name != null)
+                    {
+                        @itemPedido.ItemCompra.Name
+                    }
+                    else
+                    {
+                        <text>Nome do Produto Indisponível</text>
+                    }
+                </td>
+                <td>
+                    @if (itemPedido.ItemCompra != null && itemPedido.ItemCompra.Preco != null)
+                    {
+                        @itemPedido.ItemCompra.Preco
+                    }
+                    else
+                    {
+                        <text>Preço do Produto Indisponível</text>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

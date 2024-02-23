@@ -1,0 +1,34 @@
+﻿@model List<Item>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Items</h1>
+
+<div>
+    <a asp-controller="ItemsMVC" asp-action="Create" class="btn btn-primary">
+        Create New Item
+    </a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>...</th>
+    </tr>
+    @foreach (Item item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Preco</td>
+            <td>
+                <a asp-controller="ItemsMVC" asp-action="Edit" asp-route-name="@item.Name">Edit</a>
+                <a asp-controller="ItemsMVC" asp-action="Delete" asp-route-name="@item.Name">Delete</a>
+
+            </td>
+        </tr>
+    }
+</table>

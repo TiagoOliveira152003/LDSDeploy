@@ -1,0 +1,39 @@
+﻿﻿@* @using WebAPI.Models*@
+@model List<Ingrediente>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Ingredientes</h1>
+
+<div>
+    <a asp-controller="StockMVC" asp-action="Create" class="btn btn-primary">
+        Create New Ingredient
+    </a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Image</th>
+        <th>...</th>
+    </tr>
+    @foreach (Ingrediente ingrediente in Model)
+    {
+        <tr>
+            <td>@ingrediente.Name</td>
+            <td>@ingrediente.Price</td>
+            <td>@ingrediente.Stock</td>
+            <td>@ingrediente.Image</td>
+            <td>
+                <a asp-controller="StockMVC" asp-action="Edit" asp-route-name="@ingrediente.Name">Edit</a>
+                <a asp-controller="StockMVC" asp-action="Delete" asp-route-name="@ingrediente.Name">Delete</a>
+
+            </td>
+        </tr>
+    }
+</table>

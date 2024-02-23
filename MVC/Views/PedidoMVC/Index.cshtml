@@ -1,0 +1,58 @@
+﻿@* @using WebAPI.Models*@
+@model List<Pedido>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Pedidos</h1>
+
+<div>
+    <a asp-controller="PedidoMVC" asp-action="Create" class="btn btn-primary">
+        Create New Pedido
+    </a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Número de identificação</th>
+        <th>Estado</th>
+        <th>Detalhes</th>
+        <th>Alterar o estado do pedido</th>
+    </tr>
+    @foreach (Pedido pedido in Model)
+    {
+        <tr>
+            <td>@pedido.Id</td>
+            <td>@pedido.Status</td>
+            <td>
+                <a asp-controller="PedidoMVC" asp-action="Details" asp-route-id="@pedido.Id" class="btn btn-primary">Ver</a>
+            </td>
+            <td>
+                <form asp-controller="PedidoMVC" asp-action="MudarStatus" method="post">
+                    <input type="hidden" name="pedidoId" value="@pedido.Id" />
+                    <select name="novoStatus" class="form-control" onchange="habilitarBotao(this)">
+                        <option value="" selected disabled hidden>Altere aqui</option>
+                        <option value="Preparar">A preparar</option>
+                        <option value="Pronto">Pronto</option>
+                        <option value="Entregue">Entregue</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-success" disabled>Alterar</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<script>
+    function habilitarBotao(selectElement) {
+        var alterarButton = selectElement.parentNode.querySelector('button[type="submit"]');
+        if (selectElement.value !== "") {
+            alterarButton.removeAttribute('disabled');
+        } else {
+            alterarButton.setAttribute('disabled', 'disabled');
+        }
+    }
+</script>

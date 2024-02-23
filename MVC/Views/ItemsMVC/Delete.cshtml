@@ -1,0 +1,24 @@
+﻿@model Item
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete Item</h1>
+
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Name" hidden />
+    <div class="border m-2 p-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Delete Item</h2>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" disabled />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Delete</button>
+        <a asp-controller="ItemsMVC" asp-action="Index" class="btn btn-secondary">Back</a>
+    </div>
+</form>

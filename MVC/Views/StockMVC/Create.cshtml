@@ -1,0 +1,52 @@
+﻿﻿@using WebAPI.Enums
+
+@model Ingrediente
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<form method="post">
+    <div class="border m-2 p-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Ingredient</h2>
+        </div>
+        <div asp-validation-summary="All"> </div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Stock" class="form-label"></label>
+            <input asp-for="Stock" class="form-control" />
+            <span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Image" class="form-label"></label>
+            <input asp-for="Image" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            @Html.DropDownListFor(m => m.TypeComida,
+            new SelectList(Enum.GetValues(typeof(EnumTypeComida))),
+            "Select Ingredient Type")
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-controller="StockMVC" asp-action="Index" class="btn btn-secondary">Back</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

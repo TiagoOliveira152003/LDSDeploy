@@ -1,0 +1,44 @@
+﻿@model WebAPI.Models.Menu
+@using ProjetoLDS.Models
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detalhes do Menu</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome do item</th>
+            <th>Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @if (item.Name != null)
+                    {
+                        @item.Name
+                    }
+                    else
+                    {
+                        <text>Nome do Produto Indisponível</text>
+                    }
+                </td>
+                <td>
+                    @if (item.Preco != null)
+                    {
+                        @item.Preco
+                    }
+                    else
+                    {
+                        <text>Preço do Item Indisponível</text>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
